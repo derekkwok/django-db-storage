@@ -9,7 +9,7 @@ django-db-storage
 Overview
 --------
 
-This is a custom storage backend for storing files in the database instead of on the file system. It is a drop-in replacement for Django's FileSystemStorage.
+This is a custom storage backend for storing files in the database instead of the file system. It is a drop-in replacement for Django's FileSystemStorage.
 
 Requirements
 ------------

@@ -1,9 +1,8 @@
-from urllib.parse import urljoin
-
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import Storage
 from django.utils.encoding import filepath_to_uri
+from django.utils.six.moves.urllib.parse import urljoin
 
 from dbstorage.models import DBFile
 
