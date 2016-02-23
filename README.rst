@@ -4,7 +4,8 @@ django-db-storage
 .. image:: https://travis-ci.org/derekkwok/django-db-storage.svg?branch=master
     :target: https://travis-ci.org/derekkwok/django-db-storage
 
-.. image:: https://coveralls.io/repos/github/derekkwok/django-db-storage/badge.svg?branch=master :target: https://coveralls.io/github/derekkwok/django-db-storage?branch=master
+.. image:: https://coveralls.io/repos/github/derekkwok/django-db-storage/badge.svg?branch=master 
+    :target: https://coveralls.io/github/derekkwok/django-db-storage?branch=master
 
 Overview
 --------
