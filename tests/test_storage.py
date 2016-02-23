@@ -1,7 +1,9 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.core.files.base import ContentFile
 from django.test.testcases import TestCase
+from django.test.utils import override_settings
+from django.utils import timezone
 
 from dbstorage.models import DBFile
 from dbstorage.storage import DBStorage
@@ -34,7 +36,7 @@ class DBStorageTests(TestCase):
         ctime = self.storage.created_time(f_name)
 
         self.assertEqual(DBFile.objects.get(name=f_name).created_on, ctime)
-        self.assertLess(datetime.now() - self.storage.created_time(f_name), timedelta(seconds=1))
+        self.assertLess(timezone.now() - self.storage.created_time(f_name), timedelta(seconds=1))
 
     def test_file_modified_time(self):
         self.assertFalse(self.storage.exists('test.file'))
@@ -44,7 +46,15 @@ class DBStorageTests(TestCase):
         mtime = self.storage.modified_time(f_name)
 
         self.assertEqual(DBFile.objects.get(name=f_name).updated_on, mtime)
-        self.assertLess(datetime.now() - self.storage.modified_time(f_name), timedelta(seconds=1))
+        self.assertLess(timezone.now() - self.storage.modified_time(f_name), timedelta(seconds=1))
+
+    @override_settings(USE_TZ=False)
+    def test_file_created_time_tz_disabled(self):
+        self.test_file_created_time()
+
+    @override_settings(USE_TZ=False)
+    def test_file_modified_time_tz_disabled(self):
+        self.test_file_modified_time()
 
     def test_file_save_without_name(self):
         self.assertFalse(self.storage.exists('test.file'))

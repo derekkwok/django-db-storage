@@ -15,4 +15,16 @@ DATABASES = {
 
 ROOT_URLCONF = 'tests.urls'
 
+MEDIA_URL = '/media/'
+
 DEFAULT_FILE_STORAGE = 'dbstorage.storage.DBStorage'
+
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [],
+    'APP_DIRS': True,
+    'OPTIONS': {},
+}]
+
+TIME_ZONE = 'UTC'
+USE_TZ = True
