@@ -41,6 +41,18 @@ Update ``settings.py``
     # Optionally set DEFAULT_FILE_STORAGE
     DEFAULT_FILE_STORAGE = 'dbstorage.storage.DBStorage'
 
+    # Choose a root url for uploaded files
+    MEDIA_URL = '/media/'
+
+Update ``urls.py``
+
+.. code-block:: python
+
+    urlpatterns = [
+        ...
+        dbstorage_url(),
+    ]
+
 Run database migrations
 
 ::

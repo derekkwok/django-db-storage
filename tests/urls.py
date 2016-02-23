@@ -1,9 +1,5 @@
-from django.conf.urls import url
-
-from dbstorage.views import DBFileView
+from dbstorage.urls import dbstorage_url
 
 urlpatterns = [
-
-    url(r'^media/(?P<name>.*)$', DBFileView.as_view()),
-
+    dbstorage_url(),
 ]

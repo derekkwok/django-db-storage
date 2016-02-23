@@ -36,7 +36,6 @@ class DBFileViewTests(TestCase):
         response = self.client.get('/media/{}'.format(self.name))
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Last-Modified' in response)
-        print(response['Last-Modified'])
 
         response = self.client.get(
             path='/media/{}'.format(self.name),
