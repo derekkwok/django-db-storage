@@ -1,0 +1,20 @@
+sudo: false
+language: python
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+
+env:
+  - DJANGO_VERSION=1.8.9
+  - DJANGO_VERSION=1.9.2
+
+install:
+  - pip install -q Django==$DJANGO_VERSION
+  - pip install coveralls
+
+script:
+  - coverage run --source=dbstorage manage.py test
+
+after_success:
+  - coveralls
