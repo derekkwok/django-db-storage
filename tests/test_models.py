@@ -19,3 +19,4 @@ class DBFileTests(TestCase):
         self.assertEqual(db_file.size, len(content))
         self.assertTrue(db_file.created_on)
         self.assertTrue(db_file.updated_on)
+        self.assertEqual(str(db_file), name)

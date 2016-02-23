@@ -1,6 +1,8 @@
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 
+@python_2_unicode_compatible
 class DBFile(models.Model):
 
     content = models.BinaryField()
@@ -11,6 +13,9 @@ class DBFile(models.Model):
 
     class Meta:
         db_table = 'db_file'
+
+    def __str__(self):
+        return self.name
 
     def save(self, *args, **kwargs):
         self.size = len(self.content)
