@@ -12,7 +12,7 @@ class DBStorage(Storage):
     def __init__(self, base_url=None):
         if base_url is None:
             base_url = settings.MEDIA_URL
-        elif not base_url.endswith('/'):
+        if not base_url.endswith('/'):
             base_url += '/'
         self.base_url = base_url
 

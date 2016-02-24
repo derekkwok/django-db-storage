@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.test.testcases import TestCase
 from django.test.utils import override_settings
@@ -16,11 +17,20 @@ class DBStorageTests(TestCase):
     def setUp(self):
         self.storage = self.storage_class('/test_media_url/')
 
+    def test_default_base_url(self):
+        storage = self.storage_class()
+        self.assertEqual(storage.base_url, settings.MEDIA_URL)
+
+    def test_default_base_url_append_slash(self):
+        storage = self.storage_class('/test')
+        self.assertEqual(storage.base_url, '/test/')
+
     def test_file_access_options(self):
         self.assertFalse(self.storage.exists('storage_test'))
 
         f = ContentFile(b'storage contents')
         self.storage.save('storage_test', f)
+        self.assertEqual(self.storage.size('storage_test'), 16)
 
         f = self.storage.open('storage_test')
         self.assertEqual(f.read(), b'storage contents')
@@ -74,3 +84,17 @@ class DBStorageTests(TestCase):
         self.assertEqual(
             self.storage.url(r"""~!*()'@#$%^&*abc`+ =.file"""),
             """/test_media_url/~!*()'%40%23%24%25%5E%26*abc%60%2B%20%3D.file""")
+
+    def test_get_valid_url_max_length(self):
+        name = 'test' * 100
+        valid_name = self.storage.get_valid_name(name)
+        self.assertEqual(valid_name, name[:255])
+
+    def test_path_not_implemented(self):
+        self.assertRaises(NotImplementedError, self.storage.path, '')
+
+    def test_listdir_not_implemented(self):
+        self.assertRaises(NotImplementedError, self.storage.listdir, '')
+
+    def test_accessed_time_not_implemented(self):
+        self.assertRaises(NotImplementedError, self.storage.accessed_time, '')
