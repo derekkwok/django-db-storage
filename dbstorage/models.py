@@ -5,7 +5,7 @@ from django.utils.encoding import python_2_unicode_compatible
 @python_2_unicode_compatible
 class DBFile(models.Model):
 
-    content = models.BinaryField()
+    content = models.BinaryField(editable=False)
     name = models.CharField(max_length=255, unique=True)
     size = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -13,6 +13,7 @@ class DBFile(models.Model):
 
     class Meta:
         db_table = 'db_file'
+        verbose_name = 'DB file'
 
     def __str__(self):
         return self.name
