@@ -31,7 +31,7 @@ Installation
 
 Installation using pip::
 
-    $ pip install git+git://github.com/derekkwok/django-db-storage.git
+    $ pip install django-db-storage
 
 Update ``settings.py``
 
