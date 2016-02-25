@@ -14,7 +14,11 @@ Warning: In many cases, storing files in the database is a BAD idea. Your databa
 
 .. _StackExchange post: http://programmers.stackexchange.com/questions/150669/is-it-a-bad-practice-to-store-large-files-10-mb-in-a-database
 
-This is a custom storage backend for storing files in the database instead of the file system. It is a drop-in replacement for Django's FileSystemStorage.
+This is a custom storage backend for storing files in the database instead of the file system and is a drop-in replacement for Django's FileSystemStorage. Some benefits of this application:
+
+* no changes needed to existing models, it just works (and if it doesn't, open a ticket!)
+* django-admin is implemented and can be used to search, upload, download and manage files
+* 100% code coverage with unit tests
 
 Requirements
 ------------
@@ -58,3 +62,25 @@ Run database migrations
 ::
 
     $ python manage.py migrate
+
+
+How to Use
+----------
+
+No modification are needed for models to work properly.
+
+.. code-block:: python
+
+    def user_directory_path(instance, filename):
+        return 'user_{0}/{1}'.format(instance.user.id, filename)
+
+    class MyModel(models.Model):
+
+        file_field1 = models.FileField()
+        file_field2 = models.FileField(upload_to='uploads/%Y/%m/%d/')
+        file_field3 = models.FileField(upload_to=user_directory_path)
+
+Bugs?
+-----
+
+Create an issue at https://github.com/derekkwok/django-db-storage/issues
