@@ -23,6 +23,12 @@ This is a custom storage backend for storing files in the database instead of th
 * django-admin is implemented and can be used to search, upload, download and manage files
 * 100% code coverage with unit tests
 
+.. image:: http://i.imgur.com/4g9tmEZt.png
+    :target: http://i.imgur.com/4g9tmEZ.png
+
+.. image:: http://i.imgur.com/A2F8xlrt.png
+    :target: http://i.imgur.com/A2F8xlr.png
+
 Requirements
 ------------
 
