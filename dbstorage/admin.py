@@ -11,6 +11,7 @@ class DBFileAdmin(admin.ModelAdmin):
 
     form = DBFileForm
     list_display = ['name', 'download', 'file_size', 'updated_on', 'created_on']
+    ordering = ['name']
     search_fields = ['name']
 
     def download(self, obj):
