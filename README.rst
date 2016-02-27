@@ -7,6 +7,9 @@ django-db-storage
 .. image:: https://coveralls.io/repos/github/derekkwok/django-db-storage/badge.svg?branch=master 
     :target: https://coveralls.io/github/derekkwok/django-db-storage?branch=master
 
+.. image:: https://badge.fury.io/py/django-db-storage.svg
+    :target: https://badge.fury.io/py/django-db-storage
+
 Overview
 --------
 
