@@ -9,10 +9,7 @@ class DBFileTests(TestCase):
         content = b'Hello World!'
         name = 'my-files/hello-world.txt'
 
-        db_file = DBFile.objects.create(
-            content=content,
-            name=name,
-        )
+        db_file = DBFile.objects.create(content=content, name=name)
 
         self.assertEqual(db_file.content, content)
         self.assertEqual(db_file.name, name)
