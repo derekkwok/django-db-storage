@@ -20,15 +20,12 @@ class DBStorage(Storage):
         return self._open(name, mode)
 
     def _open(self, name, mode='rb'):
-        f = DBFile.objects.get(name=name)
+        f = DBFile.objects.only('content').get(name=name)
         return ContentFile(f.content)
 
     def _save(self, name, content):
         name = self.get_available_name(name, max_length=255)
-        DBFile.objects.create(
-            content=content.read(),
-            name=name,
-        )
+        DBFile.objects.create(content=content.read(), name=name)
         return name
 
     def get_valid_name(self, name):
@@ -47,7 +44,7 @@ class DBStorage(Storage):
         raise NotImplementedError('DBStorage does not support listdir() method')
 
     def size(self, name):
-        return DBFile.objects.get(name=name).size
+        return DBFile.objects.only('size').get(name=name).size
 
     def url(self, name):
         return urljoin(self.base_url, filepath_to_uri(name))
@@ -56,7 +53,7 @@ class DBStorage(Storage):
         raise NotImplementedError('DBStorage does not support accessed_time() method')
 
     def created_time(self, name):
-        return DBFile.objects.get(name=name).created_on
+        return DBFile.objects.only('created_on').get(name=name).created_on
 
     def modified_time(self, name):
-        return DBFile.objects.get(name=name).updated_on
+        return DBFile.objects.only('updated_on').get(name=name).updated_on

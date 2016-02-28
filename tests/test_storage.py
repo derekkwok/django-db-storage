@@ -31,6 +31,7 @@ class DBStorageTests(TestCase):
         f = ContentFile(b'storage contents')
         self.storage.save('storage_test', f)
         self.assertEqual(self.storage.size('storage_test'), 16)
+        self.assertNumQueries(1, self.storage.size, 'storage_test')
 
         f = self.storage.open('storage_test')
         self.assertEqual(f.read(), b'storage contents')
@@ -39,24 +40,22 @@ class DBStorageTests(TestCase):
         self.assertFalse(self.storage.exists('storage_test'))
 
     def test_file_created_time(self):
-        self.assertFalse(self.storage.exists('test.file'))
+        name = 'test.file'
+        DBFile.objects.create(content=b'custom content', name=name)
+        ctime = self.storage.created_time(name)
 
-        f = ContentFile(b'custom contents')
-        f_name = self.storage.save('test.file', f)
-        ctime = self.storage.created_time(f_name)
-
-        self.assertEqual(DBFile.objects.get(name=f_name).created_on, ctime)
-        self.assertLess(timezone.now() - self.storage.created_time(f_name), timedelta(seconds=1))
+        self.assertEqual(DBFile.objects.get(name=name).created_on, ctime)
+        self.assertLess(timezone.now() - self.storage.created_time(name), timedelta(seconds=1))
+        self.assertNumQueries(1, self.storage.created_time, name)
 
     def test_file_modified_time(self):
-        self.assertFalse(self.storage.exists('test.file'))
+        name = 'test.file'
+        DBFile.objects.create(content=b'custom content', name=name)
+        mtime = self.storage.modified_time(name)
 
-        f = ContentFile(b'custom contents')
-        f_name = self.storage.save('test.file', f)
-        mtime = self.storage.modified_time(f_name)
-
-        self.assertEqual(DBFile.objects.get(name=f_name).updated_on, mtime)
-        self.assertLess(timezone.now() - self.storage.modified_time(f_name), timedelta(seconds=1))
+        self.assertEqual(DBFile.objects.get(name=name).updated_on, mtime)
+        self.assertLess(timezone.now() - self.storage.modified_time(name), timedelta(seconds=1))
+        self.assertNumQueries(1, self.storage.modified_time, name)
 
     @override_settings(USE_TZ=False)
     def test_file_created_time_tz_disabled(self):
