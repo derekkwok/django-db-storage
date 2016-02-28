@@ -1,10 +1,11 @@
 from django.test.testcases import TestCase
 
 import dbstorage
-from dbstorage.apps import DbstorageConfig
+from dbstorage.apps import DBStorageConfig
 
 
-class DbstorageConfigTests(TestCase):
+class DBStorageConfigTests(TestCase):
 
     def test_app_config(self):
-        DbstorageConfig('dbstorage', dbstorage)
+        config = DBStorageConfig('dbstorage', dbstorage)
+        self.assertEqual(config.verbose_name, 'DB Storage')
