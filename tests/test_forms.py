@@ -38,7 +38,7 @@ class DBFileFormTests(TestCase):
         widget = DBFileWidget()
         widget.instance = None
         html = widget.render('file', '')
-        self.assertEqual(html, '<input name="file" type="file" />')
+        self.assertEqual(html, '<input type="file" name="file" />')
 
     def test_db_file_widget_with_instance(self):
         content = b'Hello World!'
