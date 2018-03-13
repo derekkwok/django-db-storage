@@ -26,6 +26,7 @@ class Command (BaseCommand):
                 rel_path = os.path.relpath(file_path, media_root)
                 if DBFile.objects.filter(name=rel_path).exists():
                     print('"%s" already exists in the database, skipping' % rel_path)
+                    continue
                 mtime = os.path.getmtime(file_path)
                 mod_time = timezone.make_aware(datetime.datetime.utcfromtimestamp(mtime), timezone.utc)
                 with open(file_path, 'rb') as f:
