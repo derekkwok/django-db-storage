@@ -11,8 +11,8 @@ import os
 class Command (BaseCommand):
 
     def add_arguments(self, parser):
-        parser.add_argument('--clear', action='store_true', default=False, help='Clears out the db_files table before importing')
-        parser.add_argument('--path', default=settings.MEDIA_ROOT, help='The root directory to import into the db_files table')
+        parser.add_argument('--clear', action='store_true', default=False, help='Clears out the db_file table before importing')
+        parser.add_argument('--path', default=settings.MEDIA_ROOT, help='The root directory to import into the db_file table')
 
     def handle(self, *args, **options):
         if options['clear']:
