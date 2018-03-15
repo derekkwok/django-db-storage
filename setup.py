@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='django-db-storage',
-    version='1.0.2',
+    version='1.1.0',
     url='https://github.com/derekkwok/django-db-storage',
     license='BSD',
     author='Derek Kwok',
