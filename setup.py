@@ -1,6 +1,6 @@
 #!/usr/bin/env
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 setup(
     name='django-db-storage',
@@ -25,10 +25,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='django metrics analytics',
-    packages=[
-        'dbstorage',
-        'dbstorage.migrations',
-    ],
+    packages=find_packages(exclude=['tests']),
     include_package_data=True,
     zip_safe=False
 )

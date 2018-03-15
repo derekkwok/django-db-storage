@@ -30,4 +30,5 @@ class Command (BaseCommand):
                 mtime = os.path.getmtime(file_path)
                 mod_time = timezone.make_aware(datetime.datetime.utcfromtimestamp(mtime), timezone.utc)
                 with open(file_path, 'rb') as f:
+                    print('Importing "%s"' % rel_path)
                     DBFile.objects.create(content=f.read(), name=rel_path, created_on=mod_time, updated_on=mod_time)
