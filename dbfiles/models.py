@@ -1,8 +1,6 @@
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class DBFile(models.Model):
 
     content = models.BinaryField(editable=False)
@@ -12,8 +10,8 @@ class DBFile(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'db_file'
-        verbose_name = 'DB file'
+        db_table = "db_file"
+        verbose_name = "DB file"
 
     def __str__(self):
         return self.name

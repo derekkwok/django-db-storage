@@ -1,4 +1,7 @@
-django-db-storage is written and maintained by Derek Kwok.
+django-db-storage was originally written by Derek Kwok.
 
 - Derek Kwok <derek.kai.chun.kwok@gmail.com>
+
+django-dbfiles was forked and is currently maintained by Dan Watson.
+
 - Dan Watson <dcwatson@gmail.com>

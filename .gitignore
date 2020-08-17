@@ -1,9 +1,11 @@
+__pycache__
 *.pyc
 .coverage
 .DS_Store
 .idea
+.vscode
 
+*.egg-info
 build
 dist
-django_db_storage.egg-info
 MANIFEST

@@ -1,13 +1,11 @@
-from django.conf.urls import url, include
 from django.contrib import admin
+from django.urls import path
 
-from dbstorage.urls import dbstorage_url
+from dbfiles.urls import dbfiles_url
 
 urlpatterns = [
-
     # admin urls
-    url(r'^admin/', admin.site.urls),
-
-    # dbstorage
-    dbstorage_url(),
+    path("admin/", admin.site.urls),
+    # dbfiles
+    dbfiles_url(),
 ]

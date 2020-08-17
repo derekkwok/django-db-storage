@@ -1,19 +1,23 @@
 from django.apps import apps
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db import models
 
-from dbstorage.models import DBFile
-from dbstorage.storage import DBStorage
+from dbfiles.models import DBFile
+from dbfiles.storage import DBStorage
 
 
-class Command (BaseCommand):
-
+class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument('--clear', action='store_true', default=False, help='Deletes orphaned db_file rows, instead of just listing them')
+        parser.add_argument(
+            "--clear",
+            action="store_true",
+            default=False,
+            help="Deletes orphaned db_file rows, instead of just listing them",
+        )
 
     def handle(self, *args, **options):
         # Grab a set of all known files in the database.
-        db_files = set(DBFile.objects.values_list('name', flat=True))
+        db_files = set(DBFile.objects.values_list("name", flat=True))
         # Loop through every model we know about, and find any FileField (or ImageField) whose storage is DBStorage.
         # Keep a set of filenames that exist in any model in the system.
         model_files = set()
@@ -25,8 +29,8 @@ class Command (BaseCommand):
         # Orphans are then just files that exist in db_file but nowhere else in the system.
         orphans = db_files - model_files
         for filename in sorted(orphans):
-            if options['clear']:
-                print('Deleting %s' % filename)
+            if options["clear"]:
+                print("Deleting %s" % filename)
                 DBFile.objects.filter(name=filename).delete()
             else:
                 print(filename)

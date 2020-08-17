@@ -1,13 +1,12 @@
 from django.test.testcases import TestCase
 
-from dbstorage.models import DBFile
+from dbfiles.models import DBFile
 
 
 class DBFileTests(TestCase):
-
     def test_db_file_save(self):
-        content = b'Hello World!'
-        name = 'my-files/hello-world.txt'
+        content = b"Hello World!"
+        name = "my-files/hello-world.txt"
 
         db_file = DBFile.objects.create(content=content, name=name)
 
