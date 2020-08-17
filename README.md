@@ -82,4 +82,4 @@ UPDATE django_migrations SET app = 'dbfiles' WHERE app = 'dbstorage';
 
 ## Bugs?
 
-Create an issue at https://github.com/dcwatson/django-dbfiles/issues
+Create an issue at https://github.com/imsweb/django-dbfiles/issues

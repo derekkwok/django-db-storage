@@ -15,10 +15,10 @@ setup(
     description="Custom Database Storage for Django",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dcwatson/django-dbfiles",
+    url="https://github.com/imsweb/django-dbfiles",
     license="BSD",
     author="Dan Watson",
-    author_email="dcwatson@gmail.com",
+    author_email="watsond@imsweb.com",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
