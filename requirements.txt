@@ -1,4 +1,4 @@
-Django>=1.8,<1.10
+Django>=1.11.17
 
 pip
 setuptools

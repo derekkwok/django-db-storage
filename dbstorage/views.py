@@ -1,7 +1,7 @@
 import mimetypes
 import time
 
-from django.http.response import HttpResponseNotModified, HttpResponse
+from django.http.response import HttpResponse, HttpResponseNotModified
 from django.shortcuts import get_object_or_404
 from django.utils.http import http_date
 from django.views.generic.base import View
@@ -30,5 +30,6 @@ class DBFileView(View):
         response = HttpResponse(db_file.content, content_type=content_type)
         response['Last-Modified'] = http_date(mtime)
         response['Content-Length'] = db_file.size
-        if encoding: response['Content-Encoding'] = encoding
+        if encoding:
+            response['Content-Encoding'] = encoding
         return response

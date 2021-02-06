@@ -1,5 +1,5 @@
 from django import forms
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 from dbstorage.models import DBFile
@@ -22,8 +22,8 @@ widget_template = """\
 
 class DBFileWidget(forms.FileInput):
 
-    def render(self, name, value, attrs=None):
-        input_html = super(DBFileWidget, self).render(name, value, attrs)
+    def render(self, name, value, attrs=None, renderer=None):
+        input_html = super(DBFileWidget, self).render(name, value, attrs, renderer)
         if not self.instance:
             return input_html
 
@@ -49,7 +49,8 @@ class DBFileForm(forms.ModelForm):
         instance = kwargs.get('instance')
         field = self.fields['file']
         field.widget.instance = instance
-        if instance: field.required = False
+        if instance:
+            field.required = False
 
     def save(self, commit=True):
         db_file = super(DBFileForm, self).save(commit=False)

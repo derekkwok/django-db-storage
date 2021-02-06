@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django.core.urlresolvers import reverse
 from django.template.defaultfilters import filesizeformat
+from django.urls import reverse
 
 from dbstorage.forms import DBFileForm
 from dbstorage.models import DBFile
